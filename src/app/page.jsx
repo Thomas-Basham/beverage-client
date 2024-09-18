@@ -3,21 +3,10 @@ import Image from "next/image";
 import beverageAPI from "@/utils/axiosInstance";
 import { useEffect, useState } from "react";
 import BeverageCard from "@/components/BeverageCard";
+import { useBeverages } from "@/contexts/beverageContext";
 
 export default function Home() {
-  const [beverages, setBeverages] = useState([]);
-
-  useEffect(() => {
-    beverageAPI.get("/beverages").then((response) => {
-      console.log(response.data);
-      setBeverages(response.data);
-    });
-
-    return () => {
-      console.log("Cleanup");
-    };
-  }, []);
-
+  const { beverages } = useBeverages();
   return (
     <div>
       {beverages &&
